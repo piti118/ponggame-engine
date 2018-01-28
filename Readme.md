@@ -14,7 +14,7 @@ The rest are just to run it on computer terminal.
 
 You will find useful information on how to integrate it with arduino in main.cpp.
 
-## Compile to run on computer
+## Compile to run on computer(Optional)
 
 You will need cmake and ncurses to compile this.
 
@@ -25,5 +25,5 @@ make
 ```
 
 If you are too lazy just head to [onlinegdb](https://onlinegdb.com/HJdjctiHM), 
-the game is bit laggy there.
+the game is bit laggy there. Make sure the terminal down below is large enough.
 

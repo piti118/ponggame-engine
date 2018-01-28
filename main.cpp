@@ -19,6 +19,8 @@ const int ncol = 8;
 PongGame pongGame(nrow, ncol);
 int* buffer = new int[nrow*ncol];
 
+/***********CHANGE THESE*********************/
+
 void setup(){
     pongGame.start(millis());
 }
@@ -73,6 +75,7 @@ void loop(){
     }
 }
 
+/******* TO THESE ************/
 
 //You don't need this for arduino either
 int main()
