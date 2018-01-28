@@ -112,5 +112,7 @@ compile_commands.json
 CTestTestfile.cmake
 build
 
+PongGame
+
 
 # End of https://www.gitignore.io/api/c++,cmake,clion
