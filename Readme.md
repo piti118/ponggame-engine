@@ -5,6 +5,8 @@
 
 `i,k` moves up and down for the right player.
 
+`space bar` to restart.
+
 ## For Homework
 
 The two files you really need are PongGame.h and PongGame.cpp.
