@@ -39,12 +39,16 @@ namespace hw4 {
         //ballPosition(top left is 0,0)
         //bassSpeed is measure in gameTicks(if you use millis on update it's millisecond)
         void reset();
-        void reset(int ballSpeed, BallPosition ballPos, BallVelocity ballDir);
+        void reset(BallPosition ballPos, BallVelocity ballDir);
 
         //move player player in direction direction
         //the user is moved instantly.
         //to get the update board call getBoard again
         void movePad(Player player, PadDirection direction);
+        //Set pad position for given player
+        //pindex = 0 for player 1 and
+        //and 1 for player 2.
+        void setPadPos(int pindex, int pos);
 
         //return true if ball got updated
         //return false if the ball doesn't get updated
@@ -69,6 +73,8 @@ namespace hw4 {
         //start the game
         //now is the game ticks(you can use millis)
         void start(unsigned long now);
+
+        void setBallSpeed(int ballSpeed){this->ballSpeed = ballSpeed;}
     private:
         unsigned int nrow, ncol;
         int padPos[2]; //0 and 1
@@ -79,7 +85,7 @@ namespace hw4 {
         GameState gameState;
         Player winner;
         void setBallPosition(BallPosition pos){ballPos = pos; dirty=true;}
-        void setPadPos(int pindex, int pos){padPos[pindex] = pos; dirty=true;}
+
         bool paddleRowCoverBallRow(int paddleRow, int ballRow);
         bool hitPlayerOne();
         bool hitPlayerTwo();

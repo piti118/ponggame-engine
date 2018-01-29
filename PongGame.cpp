@@ -1,6 +1,4 @@
 #include "PongGame.h"
-#include <iostream>
-#include <ncurses.h>
 
 namespace hw4 {
     inline int bound(int x, int vmin, int vmax) {
@@ -21,7 +19,8 @@ namespace hw4 {
     PongGame::PongGame():
             nrow(8),
             ncol(8),
-            gameState(GameState::START)
+            gameState(GameState::START),
+            ballSpeed(250)
     {
         reset();
         resetPadPos();
@@ -31,7 +30,8 @@ namespace hw4 {
     PongGame::PongGame(unsigned int nrow, unsigned int ncol):
             nrow(nrow),
             ncol(ncol),
-            gameState(GameState::START)
+            gameState(GameState::START),
+            ballSpeed(250)
     {
         reset();
         resetPadPos();
@@ -41,7 +41,7 @@ namespace hw4 {
     void PongGame::reset(){
         BallPosition bpos(4,1);
         BallVelocity bvelo(VSpeed::UP, HSpeed::RIGHT);
-        reset(250, bpos, bvelo);
+        reset(bpos, bvelo);
     }
 
     void PongGame::resetPadPos() {
@@ -49,8 +49,7 @@ namespace hw4 {
         setPadPos(1, 4);
     }
 
-    void PongGame::reset(int ballSpeed, BallPosition ballPos, BallVelocity iniVelo) {
-        this->ballSpeed = ballSpeed;
+    void PongGame::reset(BallPosition ballPos, BallVelocity iniVelo) {
         this->ballVelo = iniVelo;
         gameState = GameState::START;
         setBallPosition(ballPos);
@@ -72,16 +71,16 @@ namespace hw4 {
 
     bool PongGame::hitPlayerOne() {
         bool ret = ballVelo.hSpeed==HSpeed::LEFT &&
-               ballPos.hPos == 1 &&
-               paddleRowCoverBallRow(padPos[0], ballPos.vPos);
+                   ballPos.hPos == 1 &&
+                   paddleRowCoverBallRow(padPos[0], ballPos.vPos);
         return ret;
     }
 
 
     bool PongGame::hitPlayerTwo() {
         bool ret = ballVelo.hSpeed==HSpeed::RIGHT &&
-               ballPos.hPos == ncol-2 &&
-               paddleRowCoverBallRow(padPos[1], ballPos.vPos);
+                   ballPos.hPos == ncol-2 &&
+                   paddleRowCoverBallRow(padPos[1], ballPos.vPos);
         return ret;
     }
 
@@ -241,6 +240,11 @@ namespace hw4 {
         const int increment = dir==PadDirection::UP?-1:+1;
         const int newPos = padPos[pindex]+increment;
         padPos[pindex] = bound(newPos, 0, nrow-1);
+        dirty=true;
+    }
+
+    void PongGame::setPadPos(int pindex, int pos){
+        padPos[pindex] = bound(pos,0,nrow-1);
         dirty=true;
     }
 }
